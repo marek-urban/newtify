@@ -14,13 +14,10 @@
     <description>A WEB module for Newtify Vaadin application</description>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-		
-		<vaadin.version>14.8.14</vaadin.version>
-        <vaadin.pnpm.enabled>false</vaadin.pnpm.enabled>
-        <vaadin.optimize.bundle.enabled>false</vaadin.optimize.bundle.enabled>
-        <vaadin.minify.bundle.enabled>true</vaadin.minify.bundle.enabled>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+
+        <vaadin.version>14.8.14</vaadin.version>
         <vaadin.plugin.version>${vaadin.version}</vaadin.plugin.version>
     </properties>
 

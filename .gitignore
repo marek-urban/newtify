@@ -14,7 +14,6 @@ idea
 .idea
 .idea-modules
 node_modules/
-webpack.generated.js
 
 # spring
 application-LOCAL.properties
@@ -25,4 +24,10 @@ application-LOCAL.properties
 *.log.*.gz
 *.gz
 
+# vaadin
 *package-lock.json
+webpack.generated.js
+
+# database
+*.mv.db
+*.db

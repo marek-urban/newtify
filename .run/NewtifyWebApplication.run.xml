@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="NewtifyWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+  <configuration default="false" name="NewtifyWebApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <module name="newtify-web" />
     <extension name="coverage">
       <pattern>
@@ -8,7 +8,8 @@
       </pattern>
     </extension>
     <option name="SPRING_BOOT_MAIN_CLASS" value="sk.best.newtify.web.bootstrap.NewtifyWebApplication" />
-    <option name="WORKING_DIRECTORY" value="file://$MODULE_WORKING_DIR$" />
+    <option name="VM_PARAMETERS" value="-Dvaadin.enableDevServer=true" />
+    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/newtify-web" />
     <option name="ALTERNATIVE_JRE_PATH" />
     <option name="SHORTEN_COMMAND_LINE" value="ARGS_FILE" />
     <method v="2">

@@ -18,6 +18,24 @@
     <description>Newtify Platform application</description>
     <packaging>pom</packaging>
 
+    <contributors>
+        <contributor>
+            <name>Marek Urban</name>
+            <url>https://github.com/marek-urban</url>
+        </contributor>
+        <contributor>
+            <name>Stanislav Blasko</name>
+            <url>https://github.com/St4no10</url>
+        </contributor>
+    </contributors>
+
+    <licenses>
+        <license>
+            <name>GNU AFFERO GENERAL PUBLIC LICENSE</name>
+            <url>https://raw.githubusercontent.com/marek-urban/newtify/master/LICENSE</url>
+        </license>
+    </licenses>
+
     <modules>
         <module>newtify-api</module>
         <module>newtify-backend</module>
