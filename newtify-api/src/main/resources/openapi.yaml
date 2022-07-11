@@ -1,0 +1,95 @@
+openapi: 3.0.3
+info:
+  title: Newtify OpenApi Definition
+  description: Definition defines REST API for Newtify web service
+  version: v1
+servers:
+  - url: localhost:8081
+    description: localhost url for testing purposes
+tags:
+  - name: namedays
+    description: Group of endpoints to handle operations with name day
+paths:
+  /v1/namedays:
+    get:
+      description: Endpoint to retrieve name day for specified day and month
+      operationId: retrieveNameDay
+      parameters:
+        - in: query
+          name: month
+          schema:
+            type: integer
+          description: Refers to particular month where name day has to be checked
+        - in: query
+          name: day
+          schema:
+            type: integer
+          description: Refers to particular day where name day has to be checked
+      tags:
+        - namedays
+      responses:
+        "200":
+          description: Returns who has a name day at particular day
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NameDayDTO"
+              example:
+                - month: 1
+                  day: 5
+                  name: Andrea
+        "400":
+          $ref: "#/components/responses/badRequest"
+        "403":
+          $ref: "#/components/responses/accessDenied"
+        "500":
+          $ref: "#/components/responses/internalServerError"
+components:
+  schemas:
+    NameDayDTO:
+      type: object
+      properties:
+        month:
+          type: integer
+        day:
+          type: integer
+        name:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+  responses:
+    badRequest:
+      description: BadRequest
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            value:
+              code: BAD_REQUEST
+              message: Bad request sent
+    accessDenied:
+      description: AccessDenied
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            value:
+              code: FORBIDDEN
+              message: You don't have required permissions to perform this action.
+    internalServerError:
+      description: InternalServerError
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+          example:
+            value:
+              code: INTERNAL_ERROR
+              message: Server error occurred. Please contact to your administrator.
