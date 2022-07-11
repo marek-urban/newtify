@@ -1,9 +1,9 @@
-package sk.best.backend.controller;
+package sk.best.newtify.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import sk.best.backend.service.NamedayService;
+import sk.best.newtify.backend.service.NamedayService;
 import sk.best.newtify.api.NamedaysApi;
 import sk.best.newtify.api.dto.NameDayDTO;
 

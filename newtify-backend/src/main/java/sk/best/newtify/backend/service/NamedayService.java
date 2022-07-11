@@ -1,4 +1,4 @@
-package sk.best.backend.service;
+package sk.best.newtify.backend.service;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
