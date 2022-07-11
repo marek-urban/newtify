@@ -22,15 +22,16 @@ public class NamedayService {
     @Value("classpath:nameday.json")
     Resource resourceFile;
 
-    public NameDayDTO retrieveNameDay(Integer month, Integer day) {
+    private static JSONObject jsonObject;
 
-        JSONParser parser = new JSONParser();
+    public NameDayDTO retrieveNameDay(Integer month, Integer day) {
         String name;
 
         // read JSON file and map/convert to java POJO
         try {
-            Object obj = parser.parse(new FileReader(resourceFile.getFile()));
-            JSONObject jsonObject = (JSONObject) obj;
+            if (jsonObject == null) {
+                jsonObject = parse();
+            }
 
             // retrieve name from json object
             String actualMonth = Integer.toString(month - 1);
@@ -46,6 +47,11 @@ public class NamedayService {
         nameDayDTO.setDay(day);
         nameDayDTO.setName(name);
         return nameDayDTO;
+    }
+
+    private JSONObject parse() throws IOException, ParseException {
+        JSONParser parser = new JSONParser();
+        return (JSONObject) parser.parse(new FileReader(resourceFile.getFile()));
     }
 
 }
