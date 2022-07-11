@@ -1,4 +1,4 @@
-package sk.best.newtify.backend.bootstrap;
+package sk.best.newtify.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
