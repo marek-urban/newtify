@@ -7,9 +7,77 @@ servers:
   - url: localhost:8081
     description: localhost url for testing purposes
 tags:
+  - name: articles
+    description: Group of endpoints to handle operations with articles
   - name: namedays
     description: Group of endpoints to handle operations with name day
 paths:
+  /v1/articles:
+    post:
+      description: This is the endpoint which will create Article
+      operationId: createArticle
+      tags:
+        - articles
+      requestBody:
+        description: Data model for article creation
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateArticleDTO"
+            example:
+              title: article title
+              shortTitle: short title
+              text: very long text of article
+              createdAt: 3847319
+              author: John Doe
+              topicType: GAMING
+      responses:
+        "201":
+          description: Hey, everything went well
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleDTO"
+    get:
+      description: This endpoint will return list of articles
+      operationId: retrieveArticles
+      tags:
+        - articles
+      parameters:
+        - in: query
+          name: topic
+          schema:
+            type: string
+          description: Used to filter articles by topic
+      responses:
+        "200":
+          description: It will return list of articles either by topic or everything
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArticleDTO"
+  /v1/articles/{articleUuid}:
+    get:
+      description: This is the endpoint which will return detail of article
+      operationId: retrieveArticle
+      tags:
+        - articles
+      parameters:
+        - name: articleUuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: returns detail of article
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ArticleDTO"
   /v1/namedays:
     get:
       description: Endpoint to retrieve name day for specified day and month
@@ -46,6 +114,47 @@ paths:
           $ref: "#/components/responses/internalServerError"
 components:
   schemas:
+    ArticleDTO:
+      type: object
+      properties:
+        uuid:
+          type: string
+        title:
+          type: string
+        shortTitle:
+          type: string
+        text:
+          type: string
+        createdAt:
+          type: long
+        author:
+          type: string
+        topicType:
+          $ref: "#/components/schemas/ETopicType"
+    CreateArticleDTO:
+      type: object
+      properties:
+        title:
+          type: string
+        shortTitle:
+          type: string
+        text:
+          type: string
+        createdAt:
+          type: long
+        author:
+          type: string
+        topicType:
+          $ref: "#/components/schemas/ETopicType"
+    ETopicType:
+      type: string
+      enum:
+        - NEWS
+        - GAMING
+        - FASHION
+        - FINANCE
+        - MOVIE
+        - MUSIC
     NameDayDTO:
       type: object
       properties:
