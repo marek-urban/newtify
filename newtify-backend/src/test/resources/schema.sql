@@ -1,4 +1,4 @@
-INSERT INTO ARTICLE
+INSERT INTO ARTICLE (uuid, author, created_at, short_title, text, title, topic_type)
 VALUES (RANDOM_UUID(),
         'Blake J. Harris',
         '1400018400',
@@ -17,7 +17,7 @@ By this point, Nintendo already had penetrated most of Japan, and so Yamauchi se
         'The Rise of Nintendo: A Story in 8 Bits',
         'GAMING');
 
-INSERT INTO ARTICLE
+INSERT INTO ARTICLE (uuid, author, created_at, short_title, text, title, topic_type)
 VALUES (RANDOM_UUID(),
         'Greg Miller',
         '1581375600',
@@ -41,7 +41,7 @@ From 1970 on, the CIA and its code-breaking sibling, the National Security Agenc
         'The intelligence coup of the century',
         'NEWS');
 
-INSERT INTO ARTICLE
+INSERT INTO ARTICLE (uuid, author, created_at, short_title, text, title, topic_type)
 VALUES (RANDOM_UUID(),
         'Kevin Charles Redmon',
         '1362614400',
@@ -71,7 +71,7 @@ young people were shot to death and eight wounded.',
         'The Informant',
         'NEWS');
 
-INSERT INTO ARTICLE
+INSERT INTO ARTICLE (uuid, author, created_at, short_title, text, title, topic_type)
 VALUES (RANDOM_UUID(),
         'Lauren Puckett-Pope',
         '1656547200',
