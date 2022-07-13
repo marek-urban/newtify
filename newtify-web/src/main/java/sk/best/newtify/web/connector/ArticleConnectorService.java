@@ -10,6 +10,8 @@ import sk.best.newtify.api.ArticlesApi;
 import sk.best.newtify.api.dto.ArticleDTO;
 import sk.best.newtify.api.dto.CreateArticleDTO;
 
+import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,20 +29,41 @@ public class ArticleConnectorService implements ArticlesApi {
 
     @Override
     public ResponseEntity<ArticleDTO> createArticle(@NonNull CreateArticleDTO createArticleDTO) {
-        // TODO Urban 13. 7. 2022: Try to implement
-        return null;
+        try {
+            return restTemplate.postForEntity(ARTICLES_API_URL, createArticleDTO, ArticleDTO.class);
+        } catch (Exception e) {
+            log.error("ERROR createArticle", e);
+            return ResponseEntity
+                    .internalServerError()
+                    .build();
+        }
     }
 
     @Override
     public ResponseEntity<Void> deleteArticle(@NonNull String articleUuid) {
-        // TODO Urban 13. 7. 2022: Try to implement
-        return null;
+        try {
+            restTemplate.delete(ARTICLES_API_URL + "/" + articleUuid);
+            return ResponseEntity
+                    .ok()
+                    .build();
+        } catch (Exception e) {
+            log.error("ERROR deleteArticle", e);
+            return ResponseEntity
+                    .internalServerError()
+                    .build();
+        }
     }
 
     @Override
     public ResponseEntity<ArticleDTO> retrieveArticle(@NonNull String articleUuid) {
-        // TODO Urban 13. 7. 2022: Try to implement
-        return null;
+        try {
+            return restTemplate.getForEntity(ARTICLES_API_URL + "/" + articleUuid, ArticleDTO.class);
+        } catch (Exception e) {
+            log.error("ERROR retrieveArticle", e);
+            return ResponseEntity
+                    .internalServerError()
+                    .build();
+        }
     }
 
     /**
@@ -48,15 +71,43 @@ public class ArticleConnectorService implements ArticlesApi {
      */
     @Override
     public ResponseEntity<List<ArticleDTO>> retrieveArticles(@Nullable String topic) {
-        // TODO Urban 13. 7. 2022: Try to implement
-        return null;
+        try {
+            ResponseEntity<ArticleDTO[]> articlesResponse;
+            if (topic == null) {
+                articlesResponse = restTemplate.getForEntity(ARTICLES_API_URL, ArticleDTO[].class);
+            } else {
+                articlesResponse = restTemplate.getForEntity(ARTICLES_API_URL + "?topic={topic}", ArticleDTO[].class, topic);
+            }
+
+            ArticleDTO[] data = articlesResponse.getBody();
+            if (data == null) {
+                return ResponseEntity.ok(Collections.emptyList());
+            }
+
+            return ResponseEntity
+                    .status(articlesResponse.getStatusCode())
+                    .body(List.of(data));
+        } catch (Exception e) {
+            log.error("ERROR retrieveArticles", e);
+            return ResponseEntity
+                    .internalServerError()
+                    .body(Collections.emptyList());
+        }
     }
 
     @Override
     public ResponseEntity<Void> updateArticle(@NonNull String articleUuid,
                                               @NonNull CreateArticleDTO createArticleDTO) {
-        // TODO Urban 13. 7. 2022: Try to implement
-        return null;
+        try {
+            restTemplate.put(URI.create(ARTICLES_API_URL + "/" + articleUuid), createArticleDTO);
+
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            log.error("ERROR updateArticle", e);
+            return ResponseEntity
+                    .internalServerError()
+                    .build();
+        }
     }
 
 }
