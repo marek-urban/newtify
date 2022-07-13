@@ -76,7 +76,7 @@ public class ArticleService {
 
         if (topic != null && !topic.isEmpty()) {
             // we want to retrieve articles by topic name
-            TopicType topicType = TopicType.fromValue(topic);
+            TopicType topicType = TopicType.fromValue(topic.toUpperCase());
             articles = articleRepository.findAllByTopicType(topicType);
         } else {
             articles = articleRepository.findAllByOrderByCreatedAt();
