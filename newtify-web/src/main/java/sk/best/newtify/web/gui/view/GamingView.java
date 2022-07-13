@@ -4,10 +4,10 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouteAlias;
 import org.springframework.beans.factory.ObjectFactory;
 import sk.best.newtify.api.ArticlesApi;
 import sk.best.newtify.api.dto.ArticleDTO;
+import sk.best.newtify.api.dto.ETopicType;
 import sk.best.newtify.web.gui.component.article.ArticlePreviewComponent;
 import sk.best.newtify.web.gui.component.widget.NameDayWidgetComponent;
 import sk.best.newtify.web.gui.layout.MainLayout;
@@ -21,10 +21,9 @@ import java.util.List;
  * Copyright © 2022 BEST Technická univerzita Košice.
  * All rights reserved.
  */
-@PageTitle("News")
-@RouteAlias(value = "", layout = MainLayout.class)
-@Route(value = "news", layout = MainLayout.class)
-public class NewsView extends FlexLayout {
+@PageTitle("Gaming")
+@Route(value = "gaming", layout = MainLayout.class)
+public class GamingView extends FlexLayout {
 
     private static final long serialVersionUID = 4107656392983873277L;
 
@@ -38,9 +37,9 @@ public class NewsView extends FlexLayout {
 
     private List<ArticleDTO> articles = Collections.emptyList();
 
-    public NewsView(ArticlesApi articlesApi,
-                    ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory,
-                    ObjectFactory<NameDayWidgetComponent> nameDayWidgetComponentObjectFactory) {
+    public GamingView(ArticlesApi articlesApi,
+                      ObjectFactory<ArticlePreviewComponent> articlePreviewObjectFactory,
+                      ObjectFactory<NameDayWidgetComponent> nameDayWidgetComponentObjectFactory) {
         this.articlesApi                         = articlesApi;
         this.articlePreviewObjectFactory         = articlePreviewObjectFactory;
         this.nameDayWidgetComponentObjectFactory = nameDayWidgetComponentObjectFactory;
@@ -87,6 +86,7 @@ public class NewsView extends FlexLayout {
     }
 
     private void fetchArticles() {
-        articles = articlesApi.retrieveArticles(null).getBody();
+        articles = articlesApi.retrieveArticles(ETopicType.GAMING.getValue()).getBody();
     }
+
 }
