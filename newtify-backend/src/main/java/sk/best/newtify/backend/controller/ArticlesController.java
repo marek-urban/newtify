@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import sk.best.newtify.api.ArticlesApi;
 import sk.best.newtify.api.dto.ArticleDTO;
 import sk.best.newtify.api.dto.CreateArticleDTO;
+import sk.best.newtify.backend.entity.Article;
 import sk.best.newtify.backend.service.ArticleService;
 
 import java.util.List;
@@ -25,11 +26,25 @@ public class ArticlesController implements ArticlesApi {
 
     @Override
     public ResponseEntity<ArticleDTO> retrieveArticle(String articleUuid) {
-        return null;
+        ArticleDTO article = articleService.retrieveArticle(articleUuid);
+        return ResponseEntity.status(HttpStatus.OK).body(article);
     }
 
     @Override
     public ResponseEntity<List<ArticleDTO>> retrieveArticles(String topic) {
-        return null;
+        List<ArticleDTO> articleList = articleService.retrieveArticles(topic);
+        return ResponseEntity.status(HttpStatus.OK).body(articleList);
+    }
+
+    @Override
+    public ResponseEntity<Void> updateArticle(String articleUuid, CreateArticleDTO createArticleDTO) {
+        articleService.updateArticle(articleUuid, createArticleDTO);
+        return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteArticle(String articleUuid) {
+        articleService.deleteArticle(articleUuid);
+        return ResponseEntity.ok().build();
     }
 }

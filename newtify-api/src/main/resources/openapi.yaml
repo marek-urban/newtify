@@ -78,6 +78,50 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ArticleDTO"
+    delete:
+      description: Endpoint which can be used to delete article resource specified by articleUuid
+      operationId: deleteArticle
+      tags:
+        - articles
+      parameters:
+        - name: articleUuid
+          in: path
+          description: Article resource identifier
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Article was successfully deleted
+    put:
+      description: Endpoint to update already existing article specified by articleUuid
+      operationId: updateArticle
+      parameters:
+        - name: articleUuid
+          in: path
+          description: Article resource identifier
+          required: true
+          schema:
+            type: string
+      tags:
+        - articles
+      requestBody:
+        description: Data model with properties which are required for article update
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateArticleDTO"
+            example:
+              title: Title Article
+              shortTitle: Short article title
+              text: Long text which belongs to article
+              createdAt: 123456
+              author: John Doe
+              topicType: GAMING
+      responses:
+        "200":
+          description: Article was successfully updated
   /v1/namedays:
     get:
       description: Endpoint to retrieve name day for specified day and month
