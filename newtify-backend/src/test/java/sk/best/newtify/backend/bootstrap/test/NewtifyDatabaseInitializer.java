@@ -22,14 +22,24 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SuppressWarnings("NewClassNamingConvention")
 public class NewtifyDatabaseInitializer {
 
+    private static final String DB_FILE_NAME = "newtify.mv.db";
+
     @Autowired
     private ResourceLoader resourceLoader;
 
     @Test
     public void initDatabase() {
         log.info("Initializing...");
-        Resource resource = resourceLoader.getResource("./../../../newtify.mv.db");
-        Assertions.assertTrue(resource.exists());
+        int maxAttempts = 10;
+        StringBuilder upperPath = new StringBuilder("./");
+        Resource dbFile = null;
+        for (int i = 0; i < maxAttempts; i++) {
+            dbFile = resourceLoader.getResource(DB_FILE_NAME + upperPath);
+            if (!dbFile.exists()) {
+                upperPath.append("../");
+            }
+        }
+        Assertions.assertTrue(dbFile.exists());
         log.info("Done.");
     }
 
